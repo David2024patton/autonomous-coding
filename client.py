@@ -57,6 +57,9 @@ def create_client(project_dir: Path, model: str):
        (see security.py for ALLOWED_COMMANDS)
     """
     if "kimi" in model.lower() or "moonshot" in model.lower():
+         # Auto-expand shorthand 'kimi' to full model name to prevent errors
+         if model.strip().lower() == "kimi":
+             model = "kimi-k2-turbo-preview"
          print(f"Initializing Kimi Client with model: {model}")
          return KimiClient(project_dir, model)
 
