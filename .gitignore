@@ -1,0 +1,13 @@
+# Agent-generated output directories
+generations/
+
+# Log files
+logs/
+
+# Secrets
+.env
+
+# Python Environment
+.venv/
+__pycache__/
+*.pyc

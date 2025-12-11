@@ -1,0 +1,1120 @@
+<project_specification>
+  <project_name>Claude.ai Clone - AI Chat Interface</project_name>
+
+  <overview>
+    Build a fully functional clone of claude.ai, Anthropic's conversational AI interface. The application should
+    provide a clean, modern chat interface for interacting with Claude via the API, including features like
+    conversation management, artifact rendering, project organization, multiple model selection, and advanced
+    settings. The UI should closely match claude.ai's design using Tailwind CSS with a focus on excellent
+    user experience and responsive design.
+  </overview>
+
+  <technology_stack>
+    <api_key>
+        You can use an API key located at /tmp/api-key for testing. You will not be allowed to read this file, but you can reference it in code.
+    </api_key>
+    <frontend>
+      <framework>React with Vite</framework>
+      <styling>Tailwind CSS (via CDN)</styling>
+      <state_management>React hooks and context</state_management>
+      <routing>React Router for navigation</routing>
+      <markdown>React Markdown for message rendering</markdown>
+      <code_highlighting>Syntax highlighting for code blocks</code_highlighting>
+      <port>Only launch on port {frontend_port}</port>
+    </frontend>
+    <backend>
+      <runtime>Node.js with Express</runtime>
+      <database>SQLite with better-sqlite3</database>
+      <api_integration>Claude API for chat completions</api_integration>
+      <streaming>Server-Sent Events for streaming responses</streaming>
+    </backend>
+    <communication>
+      <api>RESTful endpoints</api>
+      <streaming>SSE for real-time message streaming</streaming>
+      <claude_api>Integration with Claude API using Anthropic SDK</claude_api>
+    </communication>
+    <vector_db>
+      <primary>ChromaDB (local) or PostgreSQL with PGVector</primary>
+      <options>Milvus, Qdrant, Elasticsearch, Pinecone</options>
+    </vector_db>
+    <local_inference>
+       <engine>WebGPU (Transformers.js) for in-browser inference</engine>
+       <models>Llama-3-8B-Quantized, Phi-3-Mini, Whisper-Tiny</models>
+       <offline_mode>Full PWA offline support with local vector store</offline_mode>
+    </local_inference>
+    <integrations>
+    <integrations>
+      <search_providers>SearXNG, Google PSE, Brave, Tavily</search_providers>
+      <speech_to_text>Whisper (local), OpenAI Audio, Deepgram</speech_to_text>
+      <text_to_speech>ElevenLabs, Edge TTS, OpenAI Audio</text_to_speech>
+      <image_generation>DALL-E, Stable Diffusion, ComfyUI</image_generation>
+    </integrations>
+  </technology_stack>
+
+  <prerequisites>
+    <environment_setup>
+      - Repository includes .env with VITE_ANTHROPIC_API_KEY configured
+      - Frontend dependencies pre-installed via pnpm
+      - Backend code goes in /server directory
+      - Install backend dependencies as needed
+    </environment_setup>
+  </prerequisites>
+
+  <core_features>
+    <chat_interface>
+      - Clean, centered chat layout with message bubbles
+      - Streaming message responses with typing indicator
+      - Markdown rendering with proper formatting
+      - Code blocks with syntax highlighting and copy button
+      - LaTeX/math equation rendering
+      - Image upload and display in messages
+      - Multi-turn conversations with context
+      - Message editing and regeneration
+      - Stop generation button during streaming
+      - Input field with auto-resize textarea
+      - Character count and token estimation
+      - Keyboard shortcuts (Enter to send, Shift+Enter for newline)
+      - Visualized conversation flows (branching diagram)
+      - Message tags for categorization
+      - Auto-tagging based on content
+      - Rich banners for announcements
+    </chat_interface>
+
+    <artifacts>
+      - Artifact detection and rendering in side panel
+      - Code artifact viewer with syntax highlighting
+      - HTML/SVG preview with live rendering
+      - React component preview
+      - Mermaid diagram rendering
+      - Text document artifacts
+      - Artifact editing and re-prompting
+      - Full-screen artifact view
+      - Download artifact content
+      - Artifact versioning and history
+    </artifacts>
+
+    <conversation_management>
+      - Create new conversations
+      - Conversation list in sidebar
+      - Rename conversations
+      - Delete conversations
+      - Search conversations by title/content
+      - Pin important conversations
+      - Archive conversations
+      - Conversation folders/organization
+      - Duplicate conversation
+      - Export conversation (JSON, Markdown, PDF)
+      - Conversation timestamps (created, last updated)
+      - Unread message indicators
+    </conversation_management>
+
+    <projects>
+      - Create projects to group related conversations
+      - Project knowledge base (upload documents)
+      - Advanced RAG integration (PDF, Docx, Excel, OCR support)
+      - Multiple vector database support
+      - Web Search integration for grounding
+      - Project-specific custom instructions
+      - Share projects with team (mock feature)
+      - Project settings and configuration
+      - Move conversations between projects
+      - Project templates
+      - Project analytics (usage stats)
+    </projects>
+
+    <model_selection>
+      - Model selector dropdown with the following models:
+        - Claude Sonnet 4.5 (claude-sonnet-4-5-20250929) - default
+        - Claude Haiku 4.5 (claude-haiku-4-5-20251001)
+        - Claude Opus 4.1 (claude-opus-4-1-20250805)
+      - Model capabilities display
+      - Context window indicator
+      - Model-specific pricing info (display only)
+      - Switch models mid-conversation
+      - Model comparison view
+    </model_selection>
+
+    <custom_instructions>
+      - Global custom instructions
+      - Project-specific custom instructions
+      - Conversation-specific system prompts
+      - Custom instruction templates
+      - Preview how instructions affect responses
+    </custom_instructions>
+
+    <settings_preferences>
+      - Theme selection (Light, Dark, Auto)
+      - Font size adjustment
+      - Message density (compact, comfortable, spacious)
+      - Code theme selection
+      - Language preferences
+      - Accessibility options
+      - Keyboard shortcuts reference
+      - Data export options
+      - Privacy settings
+      - API key management
+    </settings_preferences>
+
+    <advanced_features>
+      - Temperature control slider
+      - Max tokens adjustment
+      - Top-p (nucleus sampling) control
+      - System prompt override
+      - Thinking/reasoning mode toggle
+      - Multi-modal input (text + images)
+      - Voice input (Speech-to-Text) with auto-send
+      - Text-to-Speech output for responses
+      - Hands-free Voice Call mode
+      - Image Generation integration (DALL-E/SD)
+      - Python Code Execution (Pyodide or Sandboxed)
+      - Pipeline system for custom plugins/workflows
+      - Function calling support
+      - Response suggestions
+      - Related prompts
+      - Conversation branching
+    </advanced_features>
+
+    <collaboration>
+      - Share conversation via link (read-only)
+      - Export conversation formats
+      - Conversation templates
+      - Prompt library
+      - Share artifacts
+      - Team workspaces (mock UI)
+      - Role-Based Access Control (RBAC)
+      - User Groups and Permissions
+      - SCIM 2.0 Provisioning (Enterprise)
+      - RLHF Annotations (Thumbs up/down, feedback)
+      - Community sharing features
+    </collaboration>
+
+    <search_discovery>
+      - Search across all conversations
+      - Filter by project, date, model
+      - Prompt library with categories
+      - Example conversations
+      - Quick actions menu
+      - Command palette (Cmd/Ctrl+K)
+    </search_discovery>
+
+    <usage_tracking>
+      - Token usage display per message
+      - Conversation cost estimation
+      - Daily/monthly usage dashboard
+      - Usage limits and warnings
+      - API quota tracking
+      - OpenTelemetry integration
+      - Detailed cost tracking per model
+    </usage_tracking>
+
+    <administration>
+      - **Admin Dashboard** (SaaS-focused)
+      - **Pricing Tiers Management**:
+          - Create/Edit Tiers (Free, Pro, Enterprise)
+          - Set pricing (monthly/yearly)
+          - Assign feature modules to tiers
+      - **Feature Management (Modules)**:
+          - Enable/Disable global capabilities per tier
+          - Modules: RAG, Image Gen, Agents, SSO, Team Workspace
+          - Toggle switch UI for easy management
+      - **App Connections**:
+          - Firebase (Auth/DB)
+          - Supabase (Backend alternative)
+          - Google (Drive/Auth)
+          - GitHub/GitLab (for code)
+      - **Appearance & Branding**:
+          - Custom Logo URL
+          - Custom Welcome Message
+          - Custom Footer Text
+          - Brand Colors
+      - User Management (Bulk import, Edit, Delete, Assign Tier)
+      - Model Management (Whitelist, Parameters, Presets)
+      - System Monitoring (Active users, Performance)
+      - Audit Logs
+      - **AI Guardrails & Security**:
+          - PII Redaction (Credit cards, Phones, Emails)
+          - Toxicity & Bias Filters
+          - Prompt Injection Defense
+          - Custom Content Policies (Regex/Keyword blocking)
+    </administration>
+
+    <agent_builder>
+      - **No-Code Agent Builder**:
+          - Drag-and-drop tool assignment
+          - Custom System Prompt editor
+          - Knowledge base attachment
+      - **Multi-Agent Orchestration**:
+          - "Crew" mode (Sequential/Hierarchical)
+          - Supervisor agents
+      - **Scheduled Agents**:
+          - Cron-job style triggers (e.g., "Summarize news at 9AM")
+    </agent_builder>
+
+    <developer_platform>
+      - **API Access**: Personal API keys for programmatic use
+      - **Webhooks**: Event triggers (Message created, Conversation started)
+      - **Embeddable Widgets**: JS snippet for external sites
+      - **Oauth Applications**: Create client credentials
+    </developer_platform>
+
+    <model_evaluation>
+      - **Eval Arena**: Blind A/B testing of models
+      - **Eval Datasets**: Create test sets of prompts
+      - **Scoring**: Automated (LLM-as-judge) and Human feedback
+      - **Performance Matrix**: Cost vs Quality graphs
+    </model_evaluation>
+
+    <app_builder_studio>
+      - **Development Environment (IDE)**:
+          - Monaco/CodeOSS based editor
+          - Browser-based VM/Container (WebContainer or Sandboxed)
+          - Terminal access
+          - File tree management
+          - Multi-language support (Node, Python, Go, etc.)
+      - **App Prototyping Agent**:
+          - "Text-to-App": Generate full Next.js/React apps from prompt
+          - "Image-to-App": Generate UI from screenshots/drawings
+          - Auto-setup of database and auth (Firebase/Supabase)
+      - **Preview & Testing**:
+          - Instant web preview (subdomain based)
+          - QR Code for mobile testing
+          - Hot-reloading
+      - **Deployment**:
+          - One-click publish (Vercel/Netlify/Firebase hosting integration)
+          - Deployment history and rollbacks
+          - Custom domain connection
+      - **Collaboration**:
+          - Real-time multiplayer editing (CRDTs)
+          - Shared workspace URLs
+          - Cursor-style AI code interaction ("Cmd+K" to edit block)
+      - **Source Control**:
+          - GitHub/GitLab integration (Auth, Push, Pull, Clone)
+          - Visual Git history
+      - **Visual Data Modeler**:
+          - Drag-and-drop ERD (Entity Relationship Diagram) designer
+          - "Visual to SQL" auto-migration generation
+          - Relationship management (One-to-Many, Many-to-Many)
+          - Instant API generation from schema
+      - **Integrations Hub**:
+          - "One-click" auth providers (Google, Microsoft, GitHub)
+          - Pre-built connectors (Stripe, Slack, Salesforce, Notion)
+          - Data ETL pipelines (Import CSV/JSON to Vector DB)
+    </app_builder_studio>
+
+    <marketplace>
+      - **App Store**: Buy/Sell AI Apps and Agents
+      - **Template Gallery**: Free & Paid starter kits
+      - **Plugins**: Community extensions for the Studio
+      - **Monetization**:
+          - Stripe Connect integration for payout
+          - Revenue split configuration
+      - **Reviews & Ratings**: Community feedback system
+    </marketplace>
+
+    <social_features>
+      - **User Profiles**:
+          - Avatar/Photo upload
+          - Bio/About Me
+          - "Tech Stack" badges
+          - Portfolio of Public Chats/Agents
+      - **Engagement**:
+          - **Activity Feed**: "TikTok/X" style feed of shared prompts
+          - **Remixing**: "Fork" a user's conversation to try your own path
+          - **Reactions**: Likes, Bookmarks, and Comments
+          - **Following**: Subscribe to creators
+      - **Leaderboards**: Top Creators, Trending Agents
+    </social_features>
+
+    <gamification>
+      - **Progression System**:
+         - XP (Experience Points) for chatting, building, and learning
+         - Leveling system (Level 1-100) with rewards
+      - **Daily Streaks**: Visual trackers to encourage daily usage
+      - **Achievements/Badges**:
+         - "Hello World" (First App)
+         - "Bug Hunter" (Fixed 10 errors)
+         - "Sage" (Helped 50 users)
+      - **Unlockables**: Profile frames, IDE themes, Custom Agent Avatars
+    </gamification>
+
+    <voice_mode>
+       - **Hands-Free UI**: Large buttons, high contrast, simplified layout
+       - **Wake Word**: "Hey Agent" detection (where supported)
+       - **Scenarios**:
+          - *Workbench Mode*: Loudspeaker output, high sensitivity mic
+          - *Kitchen Mode*: Timer integration, recipe step-by-step
+          - *Drive Mode*: Voice-only interaction, almost zero UI
+    </voice_mode>
+
+    <expert_persona_library>
+      - **Medical & Wellness**:
+          - *Nurse Assistant*: Symptom checker, first aid info
+          - *Fitness Trainer*: Workout plans, macro tracking
+          - *Christian Therapist*: Faith-based counseling & support
+      - **Education (Socratic Method)**:
+          - *Elementary Helper*: Fun, simplified explanations
+          - *Middle School Tutor*: Study habits, core subjects
+          - *High School/College*: Deep dive, research assistance (No direct answers)
+          - *Language Tutor*: Conversation practice
+      - **Trades & Crafts**:
+          - *Master Carpenter*: Woodworking plans, joinery tips
+          - *Electrician Helper*: Wiring diagrams, code compliance checks
+          - *Plumber Assistant*: Leak troubleshooting, piping layouts
+      - **Professional Services**:
+          - *Legal Researcher*: Case law lookup, contract explanation
+          - *Financial Advisor*: Budgeting, investment terminology
+          - *Content Creator*: Viral hooks, script writing, video ideas
+      - **Lifestyle**:
+          - *Executive Chef*: Recipes based on fridge ingredients
+          - *Travel Agent*: Itinerary planning, hidden gems
+          - *Interior Designer*: Room layout, color matching
+    </expert_persona_library>
+
+    <legal_disclaimers>
+      - **Professional Advice Warning**: Mandatory modal before accessing Medical, Legal, or Financial personas.
+      - **Text**: "This AI is NOT a licensed professional. Information is for educational purposes only. Always consult a qualified human expert for real-world advice."
+      - **Education Clause**: "Homework Helpers are designed to guide learning, not provide cheating answers."
+    </legal_disclaimers>
+
+    <onboarding>
+      - Welcome screen for new users
+      - Feature tour highlights
+      - Example prompts to get started
+      - Quick tips and best practices
+      - Keyboard shortcuts tutorial
+    </onboarding>
+
+    <accessibility>
+      - Full keyboard navigation
+      - Screen reader support
+      - ARIA labels and roles
+      - High contrast mode
+      - Focus management
+      - Reduced motion support
+    </accessibility>
+
+    <responsive_design>
+      - Mobile-first responsive layout
+      - Touch-optimized interface
+      - Collapsible sidebar on mobile
+      - Swipe gestures for navigation
+      - Adaptive artifact display
+      - Progressive Web App (PWA) support
+    </responsive_design>
+  </core_features>
+
+  <database_schema>
+    <tables>
+      <users>
+        - id, email, name, avatar_url
+        - role (admin/user/pending), group_ids
+        - created_at, last_login
+        - preferences (JSON: theme, font_size, etc.)
+        - custom_instructions
+      </users>
+
+      <user_roles>
+        - id, name, permissions (JSON)
+      </user_roles>
+
+      <pricing_tiers>
+        - id, name, price_monthly, price_yearly
+        - currency, is_active, is_default
+        - features (JSON: list of enabled module IDs)
+        - limits (JSON: max_users, max_projects, etc.)
+        - created_at, updated_at
+      </pricing_tiers>
+
+      <app_connections>
+        - id, provider_name (firebase/supabase/google)
+        - config (JSON: encrypted API keys/secrets)
+        - is_enabled, last_synced_at
+        - created_at, updated_at
+      </app_connections>
+
+      <site_settings>
+        - id, key, value, type
+        - (keys: logo_url, welcome_msg, footer_text, etc.)
+      </site_settings>
+
+      <agent_configs>
+        - id, user_id, name, description
+        - system_prompt, model_config (JSON)
+        - tools (JSON array of tool definitions)
+        - schedule_cron, is_active
+        - created_at, updated_at
+      </agent_configs>
+
+      <guardrail_rules>
+        - id, name, pattern, action (block/redact/flag)
+        - is_active, severity
+      </guardrail_rules>
+
+      <webhooks>
+        - id, user_id, target_url, events (JSON array)
+        - secret, is_active
+        - last_triggered_at, failure_count
+      </webhooks>
+
+      <evaluations>
+        - id, user_id, name, dataset_path
+        - models_tested (JSON), results_summary (JSON)
+        - created_at, completed_at
+      </evaluations>
+
+      <workspaces>
+        - id, user_id, name, description
+        - template_id, status (running/stopped/hibernated)
+        - container_config (JSON: memory, cpu, image)
+        - git_repo_url, git_branch
+        - is_public, share_token
+        - created_at, last_accessed_at
+      </workspaces>
+
+      <deployments>
+        - id, workspace_id, user_id
+        - status (building/live/failed), url
+        - commit_hash, build_logs_path
+        - created_at, updated_at
+      </deployments>
+
+      <git_integrations>
+        - id, user_id, provider (github/gitlab)
+        - access_token (encrypted), username
+        - created_at
+      </git_integrations>
+
+      <marketplace_listings>
+        - id, user_id, title, description, price
+        - type (app/agent/template/plugin)
+        - content_url (zip/repo), demo_url
+        - sales_count, rating_avg
+        - created_at, updated_at
+      </marketplace_listings>
+
+        - created_at, updated_at
+      </marketplace_listings>
+
+      <personas>
+        - id, basic_info (name, avatar, category)
+        - system_prompt (defines personality/restrictions)
+        - safety_level (strict/standard)
+        - disclaimer_required (boolean)
+        - created_at, usage_count
+      </personas>
+
+      <social_graph>
+        - id, follower_id, following_id
+        - created_at
+      </social_graph>
+
+      <social_interactions>
+        - id, user_id, target_type (conversation/agent)
+        - target_id, type (like/remix/comment)
+        - content (for comments)
+        - created_at
+      </social_interactions>
+
+        - content (for comments)
+        - created_at
+      </social_interactions>
+
+      <user_achievements>
+        - id, user_id, achievement_id
+        - unlocked_at, progress_data (JSON)
+      </user_achievements>
+
+      <user_stats>
+        - id, user_id
+        - current_streak, max_streak, last_active_date
+        - total_xp, current_level
+        - total_messages, total_apps_built
+      </user_achievements>
+
+      <marketplace_transactions>
+        - id, buyer_id, seller_id, listing_id
+        - amount, currency, platform_fee
+        - stripe_payment_id, status
+        - created_at
+      </marketplace_transactions>
+
+      <data_models>
+        - id, project_id, name, schema_json
+        - is_deployed, current_migration_version
+        - created_at, updated_at
+      </data_models>
+
+      <projects>
+        - id, user_id, name, description, color
+        - custom_instructions, knowledge_base_path
+        - vector_db_collection_id
+        - created_at, updated_at
+        - is_archived, is_pinned
+      </projects>
+
+      <documents>
+        - id, project_id, user_id, type
+        - filename, path, size, hash
+        - extraction_method, vector_id
+        - created_at, updated_at
+      </documents>
+
+      <conversations>
+        - id, user_id, project_id, title
+        - model, created_at, updated_at, last_message_at
+        - is_archived, is_pinned, is_deleted
+        - settings (JSON: temperature, max_tokens, etc.)
+        - token_count, message_count
+        - tags (JSON array)
+      </conversations>
+
+      <messages>
+        - id, conversation_id, role (user/assistant/system)
+        - content, created_at, edited_at
+        - tokens, finish_reason
+        - images (JSON array of image data)
+        - parent_message_id (for branching)
+      </messages>
+
+      <artifacts>
+        - id, message_id, conversation_id
+        - type (code/html/svg/react/mermaid/text)
+        - title, identifier, language
+        - content, version
+        - created_at, updated_at
+      </artifacts>
+
+      <shared_conversations>
+        - id, conversation_id, share_token
+        - created_at, expires_at, view_count
+        - is_public
+      </shared_conversations>
+
+      <prompt_library>
+        - id, user_id, title, description
+        - prompt_template, category, tags (JSON)
+        - is_public, usage_count
+        - created_at, updated_at
+      </prompt_library>
+
+      <conversation_folders>
+        - id, user_id, project_id, name, parent_folder_id
+        - created_at, position
+      </conversation_folders>
+
+      <conversation_folder_items>
+        - id, folder_id, conversation_id
+      </conversation_folder_items>
+
+      <usage_tracking>
+        - id, user_id, conversation_id, message_id
+        - model, input_tokens, output_tokens
+        - cost_estimate, created_at
+      </usage_tracking>
+
+      <api_keys>
+        - id, user_id, key_name, api_key_hash
+        - created_at, last_used_at
+        - is_active
+      </api_keys>
+    </tables>
+  </database_schema>
+
+  <api_endpoints_summary>
+    <authentication>
+      - POST /api/auth/login
+      - POST /api/auth/logout
+      - GET /api/auth/me
+      - PUT /api/auth/profile
+    </authentication>
+
+    <conversations>
+      - GET /api/conversations
+      - POST /api/conversations
+      - GET /api/conversations/:id
+      - PUT /api/conversations/:id
+      - DELETE /api/conversations/:id
+      - POST /api/conversations/:id/duplicate
+      - POST /api/conversations/:id/export
+      - PUT /api/conversations/:id/archive
+      - PUT /api/conversations/:id/pin
+      - POST /api/conversations/:id/branch
+    </conversations>
+
+    <messages>
+      - GET /api/conversations/:id/messages
+      - POST /api/conversations/:id/messages
+      - PUT /api/messages/:id
+      - DELETE /api/messages/:id
+      - POST /api/messages/:id/regenerate
+      - GET /api/messages/stream (SSE endpoint)
+    </messages>
+
+    <artifacts>
+      - GET /api/conversations/:id/artifacts
+      - GET /api/artifacts/:id
+      - PUT /api/artifacts/:id
+      - DELETE /api/artifacts/:id
+      - POST /api/artifacts/:id/fork
+      - GET /api/artifacts/:id/versions
+    </artifacts>
+
+    <projects>
+      - GET /api/projects
+      - POST /api/projects
+      - GET /api/projects/:id
+      - PUT /api/projects/:id
+      - DELETE /api/projects/:id
+      - POST /api/projects/:id/knowledge
+      - GET /api/projects/:id/conversations
+      - PUT /api/projects/:id/settings
+    </projects>
+
+    <sharing>
+      - POST /api/conversations/:id/share
+      - GET /api/share/:token
+      - DELETE /api/share/:token
+      - PUT /api/share/:token/settings
+    </sharing>
+
+    <prompts>
+      - GET /api/prompts/library
+      - POST /api/prompts/library
+      - GET /api/prompts/:id
+      - PUT /api/prompts/:id
+      - DELETE /api/prompts/:id
+      - GET /api/prompts/categories
+      - GET /api/prompts/examples
+    </prompts>
+
+    <search>
+      - GET /api/search/conversations?q=query
+      - GET /api/search/messages?q=query
+      - GET /api/search/artifacts?q=query
+      - GET /api/search/prompts?q=query
+    </search>
+
+    <folders>
+      - GET /api/folders
+      - POST /api/folders
+      - PUT /api/folders/:id
+      - DELETE /api/folders/:id
+      - POST /api/folders/:id/items
+      - DELETE /api/folders/:id/items/:conversationId
+    </folders>
+
+    <usage>
+      - GET /api/usage/daily
+      - GET /api/usage/monthly
+      - GET /api/usage/by-model
+      - GET /api/usage/conversations/:id
+    </usage>
+
+    <settings>
+      - GET /api/settings
+      - PUT /api/settings
+      - GET /api/settings/custom-instructions
+      - PUT /api/settings/custom-instructions
+    </settings>
+
+    <claude_api>
+      - POST /api/claude/chat (proxy to Claude API)
+      - POST /api/claude/chat/stream (streaming proxy)
+      - GET /api/claude/models
+      - POST /api/claude/images/upload
+    </claude_api>
+  </api_endpoints_summary>
+
+  <ui_layout>
+    <main_structure>
+      - Three-column layout: sidebar (conversations), main (chat), panel (artifacts)
+      - Collapsible sidebar with resize handle
+      - Responsive breakpoints: mobile (single column), tablet (two column), desktop (three column)
+      - Persistent header with project/model selector
+      - Bottom input area with send button and options
+    </main_structure>
+
+    <sidebar_left>
+      - New chat button (prominent)
+      - Project selector dropdown
+      - Search conversations input
+      - Pinned chats section
+      - Conversations list (grouped by date)
+      - Tag filter
+      - Folder tree view (collapsible)
+      - Settings gear icon at bottom
+      - Admin panel link (if admin)
+      - User profile at bottom
+    </sidebar_left>
+
+    <main_chat_area>
+      - Conversation title (editable inline)
+      - Model selector badge
+      - Message history (scrollable)
+      - Welcome screen for new conversations
+      - Suggested prompts (empty state)
+      - Input area with formatting toolbar
+      - Attachment button for images
+      - Send button with loading state
+      - Stop generation button
+    </main_chat_area>
+
+    <artifacts_panel>
+      - Artifact header with title and type badge
+      - Code editor or preview pane
+      - Tabs for multiple artifacts
+      - Full-screen toggle
+      - Download button
+      - Edit/Re-prompt button
+      - Version selector
+      - Close panel button
+    </artifacts_panel>
+
+    <modals_overlays>
+      - Settings modal (tabbed interface)
+      - Admin panel (full screen overlay)
+      - Model builder/playground
+      - Share conversation modal
+      - Export options modal
+      - Project settings modal
+      - Prompt library modal
+      - Command palette overlay
+      - Keyboard shortcuts reference
+    </modals_overlays>
+
+    <studio_interface>
+      - **IDE Layout**:
+          - Left: File Explorer & Git panel
+          - Center: Code Editor (Tabs) & Preview Split
+          - Bottom: Terminal & AI Chat Assistant
+          - Right: App Prototyping Agent Chat
+      - **Top Bar**: run/stop controls, deployment status, share button
+      - **Preview Window**:
+          - Address bar, device toggle (desktop/mobile)
+          - QR code display
+      - **AI Assistant Panel**:
+          - "Fix this error" buttons in terminal
+          - "Generate Code" inline actions
+    </studio_interface>
+  </ui_layout>
+
+  <design_system>
+    <color_palette>
+      - Primary: Orange/amber accent (#CC785C claude-style)
+      - Background: White (light mode), Dark gray (#1A1A1A dark mode)
+      - Surface: Light gray (#F5F5F5 light), Darker gray (#2A2A2A dark)
+      - Text: Near black (#1A1A1A light), Off-white (#E5E5E5 dark)
+      - Borders: Light gray (#E5E5E5 light), Dark gray (#404040 dark)
+      - Code blocks: Monaco editor theme
+    </color_palette>
+
+    <typography>
+      - Sans-serif system font stack (Inter, SF Pro, Roboto, system-ui)
+      - Headings: font-semibold
+      - Body: font-normal, leading-relaxed
+      - Code: Monospace (JetBrains Mono, Consolas, Monaco)
+      - Message text: text-base (16px), comfortable line-height
+    </typography>
+
+    <components>
+      <message_bubble>
+        - User messages: Right-aligned, subtle background
+        - Assistant messages: Left-aligned, no background
+        - Markdown formatting with proper spacing
+        - Inline code with bg-gray-100 background
+        - Code blocks with syntax highlighting
+        - Copy button on code blocks
+      </message_bubble>
+
+      <buttons>
+        - Primary: Orange/amber background, white text, rounded
+        - Secondary: Border style with hover fill
+        - Icon buttons: Square with hover background
+        - Disabled state: Reduced opacity, no pointer events
+      </buttons>
+
+      <inputs>
+        - Rounded borders with focus ring
+        - Textarea auto-resize
+        - Placeholder text in gray
+        - Error states in red
+        - Character counter
+      </inputs>
+
+      <cards>
+        - Subtle border or shadow
+        - Rounded corners (8px)
+        - Padding: p-4 to p-6
+        - Hover state: slight shadow increase
+      </cards>
+    </components>
+
+    <animations>
+      - Smooth transitions (150-300ms)
+      - Fade in for new messages
+      - Slide in for sidebar
+      - Typing indicator animation
+      - Loading spinner for generation
+      - Skeleton loaders for content
+    </animations>
+  </design_system>
+
+  <key_interactions>
+    <message_flow>
+      1. User types message in input field
+      2. Optional: Attach images via button
+      3. Click send or press Enter
+      4. Message appears in chat immediately
+      5. Typing indicator shows while waiting
+      6. Response streams in word by word
+      7. Code blocks render with syntax highlighting
+      8. Artifacts detected and rendered in side panel
+      9. Message complete, enable regenerate option
+    </message_flow>
+
+    <artifact_flow>
+      1. Assistant generates artifact in response
+      2. Artifact panel slides in from right
+      3. Content renders (code with highlighting or live preview)
+      4. User can edit artifact inline
+      5. "Re-prompt" button to iterate with Claude
+      6. Download or copy artifact content
+      7. Full-screen mode for detailed work
+      8. Close panel to return to chat focus
+    </artifact_flow>
+
+    <conversation_management>
+      1. Click "New Chat" to start fresh conversation
+      2. Conversations auto-save with first message
+      3. Auto-generate title from first exchange
+      4. Click title to rename inline
+      5. Drag conversations into folders
+      6. Right-click for context menu (pin, archive, delete, export)
+      7. Search filters conversations in real-time
+      8. Click conversation to switch context
+    </conversation_management>
+  </key_interactions>
+
+  <implementation_steps>
+    <step number="1">
+      <title>Setup Project Foundation and Database</title>
+      <tasks>
+        - Initialize Express server with SQLite database
+        - Set up Claude API client with streaming support
+        - Create database schema with migrations
+        - Implement authentication endpoints
+        - Set up basic CORS and middleware
+        - Create health check endpoint
+      </tasks>
+    </step>
+
+    <step number="2">
+      <title>Build Core Chat Interface</title>
+      <tasks>
+        - Create main layout with sidebar and chat area
+        - Implement message display with markdown rendering
+        - Add streaming message support with SSE
+        - Build input area with auto-resize textarea
+        - Add code block syntax highlighting
+        - Implement stop generation functionality
+        - Add typing indicators and loading states
+      </tasks>
+    </step>
+
+    <step number="3">
+      <title>Conversation Management</title>
+      <tasks>
+        - Create conversation list in sidebar
+        - Implement new conversation creation
+        - Add conversation switching
+        - Build conversation rename functionality
+        - Implement delete with confirmation
+        - Add conversation search
+        - Create conversation grouping by date
+      </tasks>
+    </step>
+
+    <step number="4">
+      <title>Artifacts System</title>
+      <tasks>
+        - Build artifact detection from Claude responses
+        - Create artifact rendering panel
+        - Implement code artifact viewer
+        - Add HTML/SVG live preview
+        - Build artifact editing interface
+        - Add artifact versioning
+        - Implement full-screen artifact view
+      </tasks>
+    </step>
+
+    <step number="5">
+      <title>Projects and Organization</title>
+      <tasks>
+        - Create projects CRUD endpoints
+        - Build project selector UI
+        - Implement project-specific custom instructions
+        - Add folder system for conversations
+        - Create drag-and-drop organization
+        - Build project settings panel
+      </tasks>
+    </step>
+
+    <step number="6">
+      <title>Advanced Features</title>
+      <tasks>
+        - Add model selection dropdown
+        - Implement temperature and parameter controls
+        - Build image upload functionality
+        - Create message editing and regeneration
+        - Add conversation branching
+        - Implement export functionality
+      </tasks>
+    </step>
+
+    <step number="7">
+      <title>Settings and Customization</title>
+      <tasks>
+        - Build settings modal with tabs
+        - Implement theme switching (light/dark)
+        - Add custom instructions management
+        - Create keyboard shortcuts
+        - Build prompt library
+        - Add usage tracking dashboard
+      </tasks>
+    </step>
+
+    <step number="8">
+      <title>Sharing and Collaboration</title>
+      <tasks>
+        - Implement conversation sharing with tokens
+        - Create public share view
+        - Add export to multiple formats
+        - Build prompt templates
+        - Create example conversations
+      </tasks>
+    </step>
+
+    <step number="9">
+      <title>Polish and Optimization</title>
+      <tasks>
+        - Optimize for mobile responsiveness
+        - Add command palette (Cmd+K)
+        - Implement comprehensive keyboard navigation
+        - Add onboarding flow
+        - Create accessibility improvements
+        - Performance optimization and caching
+      </tasks>
+    </step>
+
+    <step number="10">
+      <title>Enterprise and SaaS Features</title>
+      <tasks>
+        - Implement Admin Dashboard Layout (Tabs: Pricing, Features, Connections, Appearance)
+        - Build Pricing Tiers CRUD (Free/Pro/Enterprise)
+        - Implement Feature Flags/Modules system
+        - Build App Connections UI (Firebase/Supabase forms)
+        - Implement Appearance Settings (Logo/Welcome Msg customization)
+        - Implement RBAC and User Groups
+        - Set up Vector Database and RAG pipeline
+        - Integrate Web Search and External Tools
+      </tasks>
+    </step>
+
+    <step number="11">
+      <title>State-of-the-Art Enhancements</title>
+      <tasks>
+        - Implement AI Guardrails (Middleware layer)
+        - Build Agent Builder UI & Scheduler
+        - Develop Model Eval Arena (A/B testing view)
+        - Create Webhook delivery system
+        - Build Embeddable Chat Widget
+      </tasks>
+    </step>
+
+    <step number="12">
+      <title>App Studio & IDE Implementation</title>
+      <tasks>
+        - Implement Monaco Editor integration
+        - Set up Browser Container/VM runtime (WebContainers)
+        - Build "Prototyping Agent" (Multi-step generation)
+        - Implement Terminal emulator (xterm.js)
+        - Create Workspace management CRUD
+        - Build Web Preview proxy system
+        - Integrate GitHub Auth and API
+        - Implement Deployment pipeline mockups
+      </tasks>
+    </step>
+
+    <step number="13">
+      <title>Ecosystem & Data Layer</title>
+      <tasks>
+        - Build Marketplace UI (Listing, Search, Detail View)
+        - Implement Visual Data Modeler (React Flow based ERD)
+        - Create "Integrations Hub" connector framework
+        - Setup Stripe Connect for Marketplace payments
+        - Implement Auto-Migration generator for Data Modeler
+      </tasks>
+    </step>
+
+    <step number="14">
+      <title>Community & Personas</title>
+      <tasks>
+        - Build User Profile pages (Avatar upload, Portfolio)
+        - Implement "Activity Feed" and Follow system
+        - Create "Remix" branching logic for shared chats
+        - Populate "Expert Persona" database with prompts
+        - Implement "Safety Disclaimer" modals for Pro agents
+        - **Prompt Engineering**: Write specialized prompts for the 15+ requested personas
+      </tasks>
+    </step>
+
+    <step number="15">
+      <title>Gamification & Polish</title>
+      <tasks>
+        - Implement XP and Leveling logic
+        - Build "Hands-Free" Voice Mode UI
+        - Integrate WebGPU (Transformers.js) for local local inference
+        - Create Achievement system and badges
+        - Final Polish: Animations, Transitions, and Mobile Optimization
+      </tasks>
+    </step>
+  </implementation_steps>
+
+  <success_criteria>
+    <functionality>
+      - Streaming chat responses work smoothly
+      - Artifact detection and rendering accurate
+      - Conversation management intuitive and reliable
+      - Project organization clear and useful
+      - Image upload and display working
+      - All CRUD operations functional
+    </functionality>
+
+    <user_experience>
+      - Interface matches claude.ai design language
+      - Responsive on all device sizes
+      - Smooth animations and transitions
+      - Fast response times and minimal lag
+      - Intuitive navigation and workflows
+      - Clear feedback for all actions
+    </user_experience>
+
+    <technical_quality>
+      - Clean, maintainable code structure
+      - Proper error handling throughout
+      - Secure API key management
+      - Optimized database queries
+      - Efficient streaming implementation
+      - Comprehensive testing coverage
+    </technical_quality>
+
+    <design_polish>
+      - Consistent with claude.ai visual design
+      - Beautiful typography and spacing
+      - Smooth animations and micro-interactions
+      - Excellent contrast and accessibility
+      - Professional, polished appearance
+      - Dark mode fully implemented
+    </design_polish>
+  </success_criteria>
+</project_specification>
